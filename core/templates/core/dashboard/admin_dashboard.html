@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Admin Dashboard</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#0f172a;
+color:white;
+padding:20px;
+}
+
+/* HEADER */
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+}
+
+.header h1{
+font-size:22px;
+}
+
+/* CARDS */
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:15px;
+margin-bottom:30px;
+}
+
+.card{
+background:#1e293b;
+padding:15px;
+border-radius:10px;
+text-align:center;
+}
+
+.card h3{
+margin:5px 0;
+}
+
+/* TABLE */
+
+table{
+width:100%;
+border-collapse:collapse;
+background:#1e293b;
+border-radius:10px;
+overflow:hidden;
+margin-bottom:30px;
+}
+
+th{
+background:#020617;
+padding:12px;
+text-align:left;
+font-size:14px;
+}
+
+td{
+padding:12px;
+border-bottom:1px solid #334155;
+font-size:14px;
+}
+
+tr:hover{
+background:#334155;
+}
+
+/* BUTTONS */
+
+.btn{
+padding:6px 12px;
+border-radius:6px;
+text-decoration:none;
+font-size:12px;
+margin-right:5px;
+}
+
+.valider{
+background:#16a34a;
+color:white;
+}
+
+.refuser{
+background:#dc2626;
+color:white;
+}
+
+.preuve{
+background:#2563eb;
+color:white;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+table,thead,tbody,th,td,tr{
+display:block;
+}
+
+th{
+display:none;
+}
+
+tr{
+margin-bottom:15px;
+background:#1e293b;
+padding:10px;
+border-radius:8px;
+}
+
+td{
+border:none;
+padding:5px 0;
+}
+
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="header">
+<h1>Admin Dashboard</h1>
+</div>
+
+<div class="cards">
+<div class="card">
+<h3>Solde Global</h3>
+<p>{{ solde_global }} FC</p>
+</div>
+
+<div class="card">
+<h3>Total Dépots</h3>
+<p>{{ total_depots }} FC</p>
+</div>
+
+<div class="card">
+<h3>Total Retraits</h3>
+<p>{{ total_retraits }} FC</p>
+</div>
+
+<div class="card">
+<h3>Total Commissions</h3>
+<p>{{ total_commissions }} FC</p>
+</div>
+</div>
+
+<h2>Dépôts en attente</h2>
+
+<table>
+<thead>
+<tr>
+<th>utilisateur</th>
+<th>Montant</th>
+<th>Moyen</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for depot in depots %}
+
+<tr>
+<td>{{ depot.profil.user.username }}</td>
+<td>{{ depot.montant }} FC</td>
+<td>{{ depot.numero_compte }}</td>
+<td>
+
+<a href="{{depot.preuve_paiement.url}}" class="btn preuve">Preuve</a>
+
+<a href="{% url 'valider_depot' depot.id %}" class="btn valider">✔ Valider</a>
+
+<a href="{% url 'refuser_depot' depot.id %}" class="btn refuser">✖ Refuser</a>
+
+</td>
+</tr>
+
+{% empty %}
+<tr>
+<td colspan="4">Aucun dépôt en attente</td>
+</tr>
+
+{% endfor %}
+
+</tbody>
+</table>
+
+
+<h2>Retraits en attente</h2>
+
+<table>
+
+<thead>
+<tr>
+<th>utilisateur</th>
+<th>Montant</th>
+<th>Compte</th>
+<th>Actions</th>
+</tr>
+</thead>
+    
+<tbody>
+    
+{% for retrait in retraits %}
+    
+<tr>
+<td>{{ retrait.profil.user.username }}</td>
+<td>{{ retrait.montant_final }} FC</td>
+<td>{{ retrait.numero_reception }} - {{ retrait.nom_compte}}</td>
+<td>
+    
+<a href="{% url 'valider_retrait' retrait.id %}" class="btn valider">✔ Valider</a>
+    
+<a href="{% url 'refuser_retrait' retrait.id %}" class="btn refuser">✖ Refuser</a>
+    
+</td>
+</tr>
+    
+{% empty %}
+<tr>
+<td colspan="4">Aucun retrait en attente</td>
+</tr>
+    
+{% endfor %}
+    
+</tbody>
+
+</table>
+
+
+<h2>Utilisateurs</h2>
+
+<table>
+
+<thead>
+<tr>
+<th>Nom</th>
+<th>solde</th>
+</tr>
+</thead>
+    
+<tbody>
+    
+{% for user in utilisateurs %}
+    
+<tr>
+<td>{{ user.user.username }}</td>
+<td>{{ user.solde }} FC</td>
+</tr>
+    
+{% empty %}
+<tr>
+<td colspan="2">Aucun utilisateur</td>
+</tr>
+    
+{% endfor %}
+    
+</tbody>
+
+</table>
+
+</body>
+</html>

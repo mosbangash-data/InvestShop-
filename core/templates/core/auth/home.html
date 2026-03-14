@@ -1,0 +1,116 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+<meta charset="UTF-8">
+<title>InvestShop</title>
+
+<style>
+
+body{
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background:linear-gradient(180deg,#0f172a,#020513);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.container{
+    text-align: center;
+}
+
+.logo{
+    width: 200px;
+    margin-bottom: 10px;
+}
+
+h1{
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+p{
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #ddd;
+}
+.presentation{
+    max-width: 650px;
+    margin: auto;
+    margin-bottom: 35px;
+    color: #e0e0e0;
+    line-height: 1.7;
+}
+
+.buttons{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.btn{
+    padding: 12px 30px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    transition: 0.3s;
+}
+
+.register{
+    background: #2d7ef7;
+}
+
+.login{
+    background: #28a745;
+}
+
+.btn:hover{
+    transform: scale(1.05);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<img src="{% static 'core/images/InvestShop.png' %}" class="logo">
+
+<h1>InvestShop</h1>
+
+<p>Smart Investment Platform</p>
+
+<p class="presentation">
+<b>InvestShop</b> est une plateforme innovante conçue por simplifer l'investissement et permettre à chacun de faire fructifier son capital. 
+Grâce à nos solutions d'investissement automatisées et à nos robot intelligents, vous pouvez génerer des opportunités de croissance tout en gardant un contrôle total sur vos operations. <br>
+Notre mission est de rendre l'investissement accessible à tous, en proposant une interface simple, securiser et transparente. 
+Avec <b>InvestShop</b>, vous pouvez suivre vos performances en temps réel, gérer vos investissement et acceder à des outils modernes pensés por accompagner votre réussite. <br>
+Rejoiger deja une communauté d'utilisateurs qui font déjà confiance à <b>InvestShop</b> pour développer leur potentiel financier. <br>
+<b>Commencez dès aujourd'hui et prennez le contrôle de votre avenir financier.</b>
+</p>
+
+<div class="buttons">
+
+<a href="{% url 'register' %}" class="btn register">
+Créer un compte
+</a>
+
+<a href="{% url 'login' %}" class="btn login">
+Se connecter
+</a>
+
+</div>
+
+</div>
+
+</body>
+</html>

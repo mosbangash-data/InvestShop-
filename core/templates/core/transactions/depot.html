@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dépôt</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:linear-gradient(180deg,#0f172a,#020617);
+color:white;
+padding:20px;
+}
+
+input{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:8px;
+border:none;
+}
+
+button{
+width:100%;
+padding:12px;
+margin-top:15px;
+background:#16a34a;
+border:none;
+border-radius:10px;
+color:white;
+font-weight:bold;
+}
+
+.deposit-info{
+    background: #707b8d;
+    border-left: 5px solid #e9211a;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin: 15px;
+}
+
+.card{
+background:#1e293b;
+padding:30px;
+border-radius:20px;
+width:90%;
+max-width:400px;
+box-shadow:0px 5px 20px rgba(0,0,0,0.5);
+margin: auto;
+}
+</style>
+
+</head>
+<body>
+<div class="card">
+<header>
+    <h1>Dépôt</h1>
+</header>
+
+<div class="container">
+
+    <div class="form-card">
+
+        <div class="info">
+            <p>Moyen de paiement : {{ moyen_de_paiement }}</p>
+            <p>Numéro du compte : {{ numero_compte }}</p>
+            <p>Nom du compte : {{ nom_compte }}</p>
+    
+        </div>
+
+        <div class="deposit-info"><strong>Instruction :</strong><br>
+            Faites un Dépôt sur ce compte, ensuite téléchargez une capture de la transaction à <b>choisir un fichier</b>
+
+        </div>
+
+        <form method="POST" enctype="multipart/form-data">
+
+            {% csrf_token %}
+                <label for="id_montant">Montant</label>
+                    {{ form.montant }}
+
+                <label for="id_preuve_paiement">Preuve de paiement</label>
+                    {{ form.preuve_paiement }}
+
+            <button type="submit">Soumettre le dépôt</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

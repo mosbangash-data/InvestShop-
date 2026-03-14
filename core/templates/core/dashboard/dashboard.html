@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Tableau de Bord</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family: Arial;
+    background: linear-gradient(180deg,#0f172a,#020617);
+    color:white;
+}
+
+/* HEADER */
+.header{
+    text-align:center;
+    padding:20px;
+    font-size:22px;
+    font-weight:bold;
+    display: flex;
+    align-items: center;
+    gap: 90px;
+}
+
+.logo{
+    height: 60px;
+    width: auto;
+    display: inline-block;
+    vertical-align: middle;
+}
+.name{
+    font-size: 22px;
+    font-weight: bold;
+    color: #b8ff34;
+    align-items: center;
+}
+
+/* CONTAINER */
+
+.container{
+    padding:20px;
+}
+
+/* CARDS */
+
+.card{
+    background:#1e293b;
+    border-radius:15px;
+    padding:15px;
+    margin-bottom:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.card span{
+    font-size:14px;
+    color:#cbd5f5;
+}
+
+.card strong{
+    font-size:18px;
+}
+
+/* BUTTONS */
+
+.btn{
+    display:block;
+    text-align:center;
+    padding:14px;
+    border-radius:12px;
+    text-decoration:none;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+.btn-depot{
+    background:#1ec061;
+    color:white;
+}
+
+.btn-retrait{
+    background:#2563eb;
+    color:white;
+}
+
+.btn-parrainage{
+    background:#f59e0B;
+    color:white;
+}
+
+
+/* PRODUITS */
+
+.product{
+    background:#1e293b;
+    border-radius:15px;
+    padding:10px;
+    display:flex;
+    align-items:center;
+    margin-top:15px;
+}
+
+.product img{
+    width:60px;
+    height:60px;
+    border-radius:10px;
+    margin-right:10px;
+}
+
+.product-info{
+    flex:1;
+}
+
+.badge{
+    background:#16a34a;
+    padding:5px 10px;
+    border-radius:10px;
+    font-size:12px;
+}
+
+/* NAVBAR */
+
+.navbar{
+    position:fixed;
+    bottom:0;
+    width:100%;
+    background:#020617;
+    display:flex;
+    justify-content:space-around;
+    padding:10px 0;
+}
+
+.navbar a{
+    text-decoration:none;
+    color:#facc15;
+    font-size:12px;
+    text-align:center;
+}
+
+</style>
+</head>
+
+<body>
+
+{% load static %}
+<header class="header">
+    <img src="{% static 'core/images/InvestShop.png' %}" alt="InvestShop Logo" class="logo">
+    <h1 class="name">Tableau de bord InvestShop</h1>
+</header>
+
+<div class="container">
+
+<h3>Bonjour, {{profil.user.username}}</h3>
+
+<div class="card">
+<span>Solde</span>
+<strong>{{profil.solde}} FC</strong>
+</div>
+
+<div class="card">
+<span>Total revenus</span>
+<strong>{{total_revenus}} FC</strong>
+</div>
+
+<div class="card">
+<span>Total déposé</span>
+<strong>{{total_depots}} FC</strong>
+</div>
+
+<div class="card">
+<span>Total Retiré</span>
+<strong>{{total_retraits}} FC</strong>
+</div>
+
+<a href="{% url 'depot' %}" class="btn btn-depot">Faire un Dépôt</a>
+<a href="{% url 'retrait' %}" class="btn btn-retrait">Retirer des Fonds</a>
+<a href="{% url 'parrainage' %}" class="btn btn-parrainage">Parrainage</a>
+
+<h3>Vos Achats</h3>
+
+{% for achat in achats %}
+
+<div class="product">
+
+<img src="{{achat.produit.photo.url}}">
+
+<div class="product-info">
+
+<strong>{{achat.produit.nom}}</strong><br>
+
+{{achat.produit.prix}} FC<br>
+
++{{achat.produit.revenu_journalier}} FC / jour
+
+</div>
+
+<span class="badge">Actif</span>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<div class="navbar">
+
+<a href="{% url 'dashboard' %}">
+🏠<br>
+Accueil
+</a>
+
+<a href="{% url 'liste_produits' %}">
+🎁<br>
+Produits
+</a>
+
+<a href="{% url 'depot' %}">
+💰<br>
+Dépôt
+</a>
+
+<a href="{% url 'retrait' %}">
+📤<br>
+Retrait
+</a>
+
+<a href="{% url 'parrainage' %}">
+👥<br>
+Parrain
+</a>
+<a href="https://t.me/TON_TELEGRAM" class="btn btn-support">
+    ☎ Support
+    </a>
+
+</div>
+
+</body>
+</html>

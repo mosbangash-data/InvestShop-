@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Produits</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(180deg,#0f172a,#020617);
+color:white;
+}
+
+.header{
+text-align:center;
+padding:20px;
+font-size:22px;
+font-weight:bold;
+}
+
+.container{
+padding:20px;
+}
+
+.product{
+background:#1e293b;
+border-radius:15px;
+padding:15px;
+display:flex;
+align-items:center;
+margin-bottom:15px;
+}
+
+.product img{
+width:70px;
+height:70px;
+border-radius:10px;
+margin-right:15px;
+}
+
+.product-info{
+flex:1;
+}
+
+.product button{
+background:#f59e0b;
+border:none;
+padding:10px 15px;
+border-radius:10px;
+color:white;
+font-weight:bold;
+}
+
+.navbar{
+position:fixed;
+bottom:0;
+width:100%;
+background:#020617;
+display:flex;
+justify-content:space-around;
+padding:10px 0;
+}
+
+.navbar a{
+color:#facc15;
+text-decoration:none;
+font-size:12px;
+text-align:center;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+Liste des Produits
+</div>
+
+<div class="container">
+
+{% for produit in produits %}
+
+<div class="product">
+
+<img src="{{produit.photo.url}}">
+
+<div class="product-info">
+
+<strong>{{produit.nom}}</strong><br>
+Investissez et obtenez revenus journaliers<br>
+Prix : {{produit.prix}} FC<br>
+Revenu quotidien : {{produit.revenu_journalier}} FC<br>
+Durée : {{produit.duree_jours}} Jours<br>
+
+</div>
+
+<form method="POST" action="{% url 'detail_produit' produit.id %}">
+{% csrf_token %}
+<button>Acheter</button>
+</form>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<div class="navbar">
+
+<a href="{% url 'dashboard' %}">🏠<br>Accueil</a>
+
+<a href="{% url 'liste_produits' %}">🎁<br>Produits</a>
+
+<a href="{% url 'depot' %}">💰<br>Dépôt</a>
+
+<a href="{% url 'retrait' %}">📤<br>Retrait</a>
+
+<a href="{% url 'parrainage' %}">👥<br>Parrain</a>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Détail Produit</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(180deg,#0f172a,#020617);
+color:white;
+padding:20px;
+}
+
+.product-card{
+background:#1e293b;
+border-radius:15px;
+padding:20px;
+text-align:center;
+}
+
+.product-card img{
+width:120px;
+border-radius:10px;
+margin-bottom:15px;
+}
+
+.price{
+font-size:22px;
+color:#f59e0b;
+margin:10px 0;
+}
+
+.revenu{
+color:#22c55e;
+}
+
+button{
+margin-top:20px;
+padding:12px 20px;
+background:#f59e0b;
+border:none;
+border-radius:10px;
+color:white;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="product-card">
+
+<img src="{{produit.photo.url}}">
+
+<h2>{{produit.nom}}</h2>
+
+<p>{{produit.description}}</p>
+
+<div class="price">
+Prix : {{produit.prix}} FC
+</div>
+
+<div class="revenu">
+Revenu quotidien : {{produit.revenu_journalier}} FC
+</div>
+
+<p>
+Durée : 90 jours
+</p>
+
+<form method="POST" action="{% url 'detail_produit' produit.id %}">
+
+{% csrf_token %}
+
+<button>
+Acheter ce produit
+</button>
+
+</form>
+
+</div>
+
+</body>
+</html>
