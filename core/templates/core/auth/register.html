@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Inscription</title>
 
@@ -8,21 +10,22 @@
 
 body{
 margin:0;
-font-family:Arial;
+font-family:Arial, Helvetica, sans-serif;
 background:linear-gradient(180deg,#0f172a,#020617);
 color:white;
 display:flex;
 justify-content:center;
 align-items:center;
-height:100vh;
+min-height:100vh;
+padding: 10px;
 }
 
 .card{
 
 background:#1e293b;
-padding:30px;
+padding:25px 30px;
 border-radius:20px;
-width:90%;
+width:100%;
 max-width:400px;
 box-shadow:0px 5px 20px rgba(0,0,0,0.5);
 
@@ -30,19 +33,26 @@ box-shadow:0px 5px 20px rgba(0,0,0,0.5);
 
 h2{
 text-align:center;
-margin-bottom:20px;
+margin-bottom:25px;
+font-size: 24px;
 }
 
 input{
 
 width:100%;
 padding:12px;
-margin:10px 0;
+margin:8px 0;
 border:none;
 border-radius:10px;
 background:#0f172a;
 color:white;
+font-size: 14px;
+box-sizing: border-box;
 
+}
+
+input::placeholder{
+    color: #ccc;
 }
 
 button{
@@ -54,11 +64,13 @@ border:none;
 border-radius:10px;
 font-weight:bold;
 color:white;
-margin-top:10px;
+cursor: pointer;
+transition: 0.3s;
+margin-top:15px;
 
 }
 
-a{
+.footer a{
 color:#38bdf8;
 text-decoration:none;
 }
@@ -72,6 +84,22 @@ margin-top:15px;
     color: #f87171;
     margin-bottom: 10px;
     font-size: 0.9em;
+}
+
+@media(max-width:480px){
+    h2{
+        font-size: 20px;
+    }
+
+    input{
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    button{
+        font-size: 14px;
+        padding: 10px;
+    }
 }
 
 </style>
@@ -94,7 +122,7 @@ margin-top:15px;
                 {% for field in form %}
                     {% if field.errors %} 
                         {% for error in field.errors %}
-                            <li>{{ errors }}</li>
+                            <li>{{ error }}</li>
                         {% endfor%}
                     {% endif %}
                 {% endfor %}
@@ -113,8 +141,7 @@ margin-top:15px;
 
  <input type="password" name="password2" placeholder="Confirmer mot de passe">
 
-<input type="text" name="code_parrain" placeholder="Code parrain (optionnel)" value="{{ form.code_parrain.value|default:'ref' }}">
-
+<input type="text" name="code_parrain" placeholder="Code parrain (optionnel)" value="{{ form.code_parrain.value }}">
 
 <button type="submit">
 S'inscrire

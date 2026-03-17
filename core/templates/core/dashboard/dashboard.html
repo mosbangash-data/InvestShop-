@@ -2,45 +2,51 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tableau de Bord</title>
 
 <style>
 
 body{
     margin:0;
-    font-family: Arial;
+    font-family: Arial, Helvetica, sans-serif;
     background: linear-gradient(180deg,#0f172a,#020617);
     color:white;
 }
 
 /* HEADER */
 .header{
-    text-align:center;
-    padding:20px;
-    font-size:22px;
-    font-weight:bold;
     display: flex;
     align-items: center;
-    gap: 90px;
+    justify-content: space-between;
+    padding:15px;
+    background: #020617;
 }
 
 .logo{
-    height: 60px;
-    width: auto;
-    display: inline-block;
-    vertical-align: middle;
+    height: 45px;
 }
 .name{
-    font-size: 22px;
+    font-size: 16px;
     font-weight: bold;
     color: #b8ff34;
     align-items: center;
+    flex: 1;
+}
+
+.logout{
+    background: #dc2626;
+    padding: 8px 12px;
+    border-radius: 8px;
+    color: white;
+    text-decoration: none;
+    font-size: 12px;
 }
 
 /* CONTAINER */
 
 .container{
-    padding:20px;
+    padding:15px;
 }
 
 /* CARDS */
@@ -49,7 +55,7 @@ body{
     background:#1e293b;
     border-radius:15px;
     padding:15px;
-    margin-bottom:15px;
+    margin-bottom:12px;
     display:flex;
     justify-content:space-between;
     align-items:center;
@@ -108,10 +114,12 @@ body{
     height:60px;
     border-radius:10px;
     margin-right:10px;
+    object-fit: cover;
 }
 
 .product-info{
     flex:1;
+    font-size: 14px;
 }
 
 .badge{
@@ -136,8 +144,27 @@ body{
 .navbar a{
     text-decoration:none;
     color:#facc15;
-    font-size:12px;
+    font-size:11px;
     text-align:center;
+}
+
+@media(max-width:480px){
+    .name{
+        font-size: 14px;
+    }
+
+    .product{
+        flex-direction: row;
+    }
+
+    .product img{
+        width: 50px;
+        height: 50px;
+    }
+
+    .card strong{
+        font-size: 16px;
+    }
 }
 
 </style>
@@ -148,7 +175,8 @@ body{
 {% load static %}
 <header class="header">
     <img src="{% static 'core/images/InvestShop.png' %}" alt="InvestShop Logo" class="logo">
-    <h1 class="name">Tableau de bord InvestShop</h1>
+    <div class="name">Tableau de bord InvestShop</div>
+    <a href="{% url 'logout' %}" class="logout">Quitter</a>
 </header>
 
 <div class="container">
@@ -231,7 +259,7 @@ Retrait
 👥<br>
 Parrain
 </a>
-<a href="https://t.me/TON_TELEGRAM" class="btn btn-support">
+<a href="https://t.me/investshoprdc243" class="btn btn-support">
     ☎ Support
     </a>
 

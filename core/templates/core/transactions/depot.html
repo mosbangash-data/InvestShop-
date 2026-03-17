@@ -1,91 +1,135 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Dépôt</title>
 
 <style>
 
 body{
-font-family:Arial;
+font-family:Arial, Helvetica, sans-serif;
 background:linear-gradient(180deg,#0f172a,#020617);
 color:white;
+margin: 0;
 padding:20px;
+}
+
+.card{
+background:#1e293b;
+padding:20px;
+border-radius:20px;
+width:100%;
+max-width:400px;
+box-shadow:0px 5px 20px rgba(0,0,0,0.5);
+margin: auto;
+}
+
+h1{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.info{
+    background: #0f172a;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.info p{
+    margin: 5px 0;
+}
+
+label{
+    font-size: 13px;
+    color: #cbd5f5;
 }
 
 input{
 width:100%;
 padding:12px;
 margin-top:10px;
-border-radius:8px;
+border-radius:10px;
 border:none;
+background: #0f172a;
+color: white;
+}
+
+input[type="file"]{
+    padding: 10px;
 }
 
 button{
 width:100%;
-padding:12px;
-margin-top:15px;
+padding:14px;
+margin-top:10px;
 background:#16a34a;
 border:none;
-border-radius:10px;
+border-radius:12px;
 color:white;
 font-weight:bold;
+cursor: pointer;
+transition: 0.3s;
+}
+
+button:hover{
+    transform: scale(1.03);
 }
 
 .deposit-info{
-    background: #707b8d;
-    border-left: 5px solid #e9211a;
-    padding: 15px;
-    border-radius: 8px;
-    font-size: 14px;
+    background: #0f172a;
+    border-left: 5px solid #f59e0b;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 13px;
     margin: 15px;
+    color: #cbd5f5;
 }
 
-.card{
-background:#1e293b;
-padding:30px;
-border-radius:20px;
-width:90%;
-max-width:400px;
-box-shadow:0px 5px 20px rgba(0,0,0,0.5);
-margin: auto;
+@media(max-width:480px){
+    .card{
+        padding: 15px;
+    }
 }
+
 </style>
 
 </head>
 <body>
 <div class="card">
-<header>
+
     <h1>Dépôt</h1>
-</header>
 
-<div class="container">
+<div class="info">
+<p><strong>Moyen de paiement :</strong> {{ moyen_de_paiement }}</p>
+<p><strong>Numéro du compte :</strong> {{ numero_compte }}</p>
+<p><strong>Nom du compte :</strong> {{ nom_compte }}</p>
+</div> 
 
-    <div class="form-card">
+<div class="deposit-info">
+<strong>Instruction :</strong><br>
+1. Envoyer le montant du produit que vous voulez acher sur le compte ci-dessus <br>
+2. Prenez une capture de la transition <br>
+3. Télécharger la preuve ci-dessous
+</div>       
 
-        <div class="info">
-            <p>Moyen de paiement : {{ moyen_de_paiement }}</p>
-            <p>Numéro du compte : {{ numero_compte }}</p>
-            <p>Nom du compte : {{ nom_compte }}</p>
-    
-        </div>
+<form method="POST" enctype="multipart/form-data">
 
-        <div class="deposit-info"><strong>Instruction :</strong><br>
-            Faites un Dépôt sur ce compte, ensuite téléchargez une capture de la transaction à <b>choisir un fichier</b>
+{% csrf_token %}
 
-        </div>
+<label for="id_montant">Montant</label>
+{{ form.montant }}
 
-        <form method="POST" enctype="multipart/form-data">
+<label for="id_preuve_paiement">Preuve de paiement</label>
+{{ form.preuve_paiement }}
 
-            {% csrf_token %}
-                <label for="id_montant">Montant</label>
-                    {{ form.montant }}
+<button type="submit">Soumettre le dépôt</button>
+</form>
 
-                <label for="id_preuve_paiement">Preuve de paiement</label>
-                    {{ form.preuve_paiement }}
-
-            <button type="submit">Soumettre le dépôt</button>
-        </form>
-    </div>
 </div>
 
 </body>

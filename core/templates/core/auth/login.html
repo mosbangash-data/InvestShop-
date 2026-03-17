@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+    
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Connexion</title>
 
@@ -14,35 +17,42 @@ color:white;
 display:flex;
 justify-content:center;
 align-items:center;
-height:100vh;
+min-height:100vh;
+padding: 10px;
 }
 
 .card{
-
 background:#1e293b;
 padding:30px;
 border-radius:20px;
-width:90%;
+width:100%;
 max-width:400px;
 box-shadow:0px 5px 20px rgba(0,0,0,0.5);
-
+box-sizing: border-box;
 }
 
 h2{
 text-align:center;
-margin-bottom:20px;
+margin-bottom:25px;
+font-size: 24px;
 }
 
 input{
 
 width:100%;
 padding:12px;
-margin:10px 0;
+margin: 8px 0;
 border:none;
 border-radius:10px;
 background:#0f172a;
 color:white;
+font-size: 14px;
+box-sizing: border-box;
 
+}
+
+input::placeholder{
+    color: #ccc;
 }
 
 button{
@@ -54,11 +64,18 @@ border:none;
 border-radius:10px;
 font-weight:bold;
 color:white;
-margin-top:10px;
+cursor: pointer;
+transition: 0.3s;
+margin-top:15px;
+font-size: 16px;
 
 }
 
-a{
+button:hover{
+    transform: scale(1.05);
+}
+
+.footer a{
 color:#38bdf8;
 text-decoration:none;
 }
@@ -66,6 +83,29 @@ text-decoration:none;
 .footer{
 text-align:center;
 margin-top:15px;
+font-size: 14px;
+}
+
+.error-list{
+    color: #f87171;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+}
+
+@media(max-width:480px){
+    h2{
+        font-size: 20px;
+    }
+
+    input{
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    button{
+        font-size: 14px;
+        padding: 10px;
+    }
 }
 
 </style>
@@ -81,6 +121,32 @@ margin-top:15px;
 <form method="POST">
 
 {% csrf_token %}
+
+{% if form.errors %}
+
+<div class="error-list">
+
+<ul>
+
+{% for field in form %}
+
+{% for error in field.errors %}
+
+<li>{{ error }}</li>
+
+{% endfor %}
+
+{% for error in form.non_field_errors %}
+
+<li>{{ error }}</li>
+
+{% endfor %}
+
+</ul>
+
+</div>
+
+{% endif %}
 
 <input type="text" name="username" placeholder="Nom d'utilisateur">
 

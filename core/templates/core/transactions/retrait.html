@@ -1,42 +1,99 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Retrait</title>
 
 <style>
 
 body{
-font-family:Arial;
+font-family:Arial, Helvetica, sans-serif;
 background:linear-gradient(180deg,#0f172a,#020617);
 color:white;
+margin: 0;
 padding:20px;
 }
 
 .form-box{
 background:#1e293b;
 padding:20px;
-border-radius:15px;
+border-radius:20px;
 max-width:400px;
 margin:auto;
+box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+h2{
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.balance{
+    background: #0f172a;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    font-size: 10px;
+    text-align: center;
+    color: #22c55e;
+}
+
+.warning{
+    background: #0f172a;
+    border-left: 4px solid #f59e0b;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 13px;
+    margin-bottom: 15px;
+    color: #cbd5f5;
+}
+
+.error{
+    background: #7f1d1d;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+
+label{
+    font-size: 13px;
+    color: #cbd5f5;
 }
 
 input{
 width:100%;
 padding:12px;
-margin-top:10px;
-border-radius:8px;
+margin-top:5px;
+margin-bottom: 10px;
+border-radius:10px;
 border:none;
+background: #0f172a;
+color: white;
 }
 
 button{
 width:100%;
-padding:12px;
-margin-top:15px;
+padding:14px;
+margin-top:10px;
 background:#2563eb;
 border:none;
-border-radius:10px;
+border-radius:12px;
 color:white;
 font-weight:bold;
+cursor: pointer;
+transition: 0.3s;
+}
+
+button:hover{
+    transform: scale(1.03);
+}
+
+@media(max-width:480px){
+    .form-box{
+        padding: 15px;
+    }
 }
 
 </style>
@@ -49,33 +106,47 @@ font-weight:bold;
 
 <h2>Demande de Retrait</h2>
 
-<form method="POST">
+<div class="balance">
 
+Solde disponible : {{ request.user.profil.solde }} FC
+
+</div>
+
+<div class="warning">
+
+Minimum de retrait requis : 12000FC <br>
+Le traitement peut prendre trois heures maximum après validation.
+
+</div>
+
+{% if form.errors %}
+
+<div class="error">
+    {% for field in form %}
+        {% for error in field.errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
+    {% endfor %}
+</div>
+{% endif %}
+
+<form method="POST">
 {% csrf_token %}
 
-<div class="container">
-    <div class="form-card">
-        {% if form.errors %}
-            <div class="error">
-                {% for field in form %}
-                    {% for error in field.errors %}
-                        <p>{{ error }}</p>
-                    {% endfor %}
-                {% endfor %}
-            </div>
-        {% endif %}
-        <form method="POST">
-            {% csrf_token %}
-            <label for="id_montant">Montant</label>
-            {{ form.montant }}
-            <label for="id_nom_compte">Nom du compte</label>
-            {{ form.nom_compte }}
-            <label for="id_numero_reception">Numéro du compte</label>
-            {{ form.numero_reception }}
-            <button type="submit">Soumettre le retrait</button>
-        </form>
-    </div>
+<label for="id_montant">Montant</label>
+{{ form.montant }}
+
+<label for="id_nom_compte">Nom du compte</label>
+{{ form.nom_compte }}
+            
+<label for="id_numero_reception">Numéro du compte</label>
+{{ form.numero_reception }}
+            
+<button type="submit">Soumettre le retrait</button>
+</form>
+
 
 </div>
     
 </body>
+</html>

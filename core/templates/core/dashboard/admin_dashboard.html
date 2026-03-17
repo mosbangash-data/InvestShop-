@@ -2,16 +2,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Dashboard</title>
 
 <style>
 
 body{
 margin:0;
-font-family:Arial;
+font-family:Arial, Helvetica, sans-serif;
 background:#0f172a;
 color:white;
-padding:20px;
+padding:15px;
 }
 
 /* HEADER */
@@ -20,7 +21,7 @@ padding:20px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-margin-bottom:30px;
+margin-bottom:25px;
 }
 
 .header h1{
@@ -39,12 +40,19 @@ margin-bottom:30px;
 .card{
 background:#1e293b;
 padding:15px;
-border-radius:10px;
+border-radius:12px;
 text-align:center;
 }
 
 .card h3{
 margin:5px 0;
+font-size: 14px;
+color: #cbd5f5;
+}
+
+.card p{
+    font-size: 18px;
+    font-weight: bold;
 }
 
 /* TABLE */
@@ -55,7 +63,7 @@ border-collapse:collapse;
 background:#1e293b;
 border-radius:10px;
 overflow:hidden;
-margin-bottom:30px;
+margin-bottom:25px;
 }
 
 th{
@@ -78,11 +86,17 @@ background:#334155;
 /* BUTTONS */
 
 .btn{
-padding:6px 12px;
+padding:6px 10px;
 border-radius:6px;
 text-decoration:none;
 font-size:12px;
-margin-right:5px;
+margin:2px;
+display: inline-block;
+transition: 0.2s;
+}
+
+.btn:hover{
+    opacity: 0.8;
 }
 
 .valider{
@@ -103,12 +117,12 @@ color:white;
 /* MOBILE */
 @media(max-width:768px){
 
-table,thead,tbody,th,td,tr{
+table,thead,tbody,tr{
 display:block;
 }
 
-th{
-display:none;
+thead{
+    display: none;
 }
 
 tr{
@@ -119,8 +133,27 @@ border-radius:8px;
 }
 
 td{
+display: block;
 border:none;
-padding:5px 0;
+padding:6px 0;
+}
+
+td::before{
+    font-weight: bold;
+    display: block;
+    color: #94a3b8;
+    font-size: 12px;
+}
+td:nth-child(1)::before{ content: "Utilisateur"; }
+td:nth-child(2)::before{ content: "Montant"; }
+td:nth-child(3)::before{ content: "Info"; }
+td:nth-child(4)::before{ content: "Actions"; }
+
+.btn{
+    display: block;
+    width: 100%;
+    margin: 5px 0;
+    text-align: center;
 }
 
 }

@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Parrainage</title>
 
 <style>
 body{
     margin:0;
-    font-family:Arial;
+    font-family: Arial, Helvetica, sans-serif;
     background:linear-gradient(180deg,#0f172a,#020617);
     color:white;
     display:flex;
     justify-content:center;
     align-items:center;
-    height:100vh;
+    min-height:100vh;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 .card{
     background:#1e293b;
-    padding:30px;
+    padding:25px;
     border-radius:20px;
-    width:90%;
+    width:100%;
     max-width:500px;
     box-shadow:0px 5px 20px rgba(0,0,0,0.5);
 }
@@ -29,14 +33,16 @@ h2{
     margin-bottom:20px;
 }
 
-input, .form-field{
+input{
     width:100%;
     padding:12px;
-    margin:10px 0;
+    margin-top:10px;
     border:none;
     border-radius:10px;
     background:#0f172a;
     color:white;
+    font-size: 14px;
+    box-sizing: border-box;
 }
 
 button{
@@ -48,9 +54,19 @@ button{
     font-weight:bold;
     color:white;
     margin-top:10px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-a{
+button:hover{
+    transform: scale(1.03);
+}
+
+.copy-link{
+    background: #1e293b;
+}
+
+.footer a{
     color:#38bdf8;
     text-decoration:none;
 }
@@ -68,25 +84,33 @@ a{
 }
 
 .filleul-item{
-    padding:8px 0;
+    padding:10px 0;
     border-bottom:1px solid #1e293b;
+    font-size: 14px;
 }
 
 .filleul-item:last-child{
     border-bottom:none;
 }
 
-.copy-link{
-    width:100%;
-    padding:10px;
-    background:#1e293b;
-    border:none;
-    border-radius:10px;
-    color:white;
-    cursor:pointer;
-    text-align:center;
-    margin-top:10px;
+@media(max-width:480px){
+    .card{
+        padding: 20px;
+    }
+
+    h2{
+        font-size: 20px;
+    }
+
+    input{
+        font-size: 13px;
+    }
+
+    .filleul-item{
+        font-size: 13px;
+    }
 }
+
 </style>
 
 </head>
@@ -118,8 +142,6 @@ a{
 <script>
 function copyLink() {
     const copyText = document.getElementById("refLink");
-    copyText.select();
-    copyText.setSelectionRange(0, 99999);
     navigator.clipboard.writeText(copyText.value);
     alert("Lien copié !");
 }
