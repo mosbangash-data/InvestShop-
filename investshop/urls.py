@@ -24,5 +24,3 @@ urlpatterns = [
     path('secure-admin-investshop/', admin.site.urls),
     path('', include('core.urls')),
 ]
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
