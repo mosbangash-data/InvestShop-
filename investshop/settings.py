@@ -67,7 +67,7 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
 
 SESSION_COOKIE_SECURE = True
-CRF_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 X_FRAME_OPTIONS = 'DENY'
 
@@ -75,8 +75,7 @@ LOGIN_REDIRECT_URL = 'dashboard'
 LOGOUT_REDIRECT_URL = 'login'
 LOGIN_URL = 'login'
 
-STATIC_URL = '/static/'
-STATICFILES_STORAGE = 'whitenoise.storage.compressedManifestStaticFileStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.compressedManifestStaticFilesStorage'
 STATICFILES_DIRS = [
     BASE_DIR / "core/static",
 ]
@@ -113,9 +112,11 @@ DATABASES = {
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 import cloudinary
-cloud_name = os.environ.get('CLOUDINARY_CLOUD_NAME')
-api_key = os.environ.get('CLOUDINARY_API_KEY')
-api_secret = os.environ.get('CLOUDINARY_API_SECRET')
+cloudinary.config(
+    cloud_name = os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    api_key = os.environ.get('CLOUDINARY_API_KEY'),
+    api_secret = os.environ.get('CLOUDINARY_API_SECRET'),
+)
 
 
 # Password validation
