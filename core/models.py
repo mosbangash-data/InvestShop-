@@ -44,7 +44,7 @@ class Produit(models.Model):
     prix = models.DecimalField(max_digits=12, decimal_places=2)
     revenu_journalier = models.DecimalField(max_digits=12, decimal_places=2)
     duree_jours = models.PositiveIntegerField(default=90)
-    photo = models.ImageField(upload_to='produits/')
+    photo = CloudinaryField('image', folder='produits')
     actif = models.BooleanField(default=True)
     date_creation = models.DateTimeField(auto_now_add=True)
 
@@ -134,7 +134,7 @@ class Depot(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     moyen_de_paiement = models.CharField(max_length=50)
     numero_compte = models.CharField(max_length=50)
-    preuve_paiement = CloudinaryField('image')
+    preuve_paiement = CloudinaryField('image', folder='preuves')
 
     def __str__(self):
         return f"{self.profil.user.username} - {self.montant} FC"
