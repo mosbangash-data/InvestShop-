@@ -24,7 +24,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'fallback-secret-pour-dev-si-ab
 DEBUG = False  # Production
 
 # Ajouter domaine exact et wildcard pour Render
-ALLOWED_HOSTS = ['.onrender.com', 'investshop-243.onrender.com']
+ALLOWED_HOSTS = ['.onrender.com']
 
 # ----------------------------
 # Applications
