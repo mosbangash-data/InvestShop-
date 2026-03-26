@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from datetime import timedelta
 from decimal import Decimal
+from cloudinary.models import CloudinaryField
 import uuid
 
 # ==============================
@@ -133,7 +134,7 @@ class Depot(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     moyen_de_paiement = models.CharField(max_length=50)
     numero_compte = models.CharField(max_length=50)
-    preuve_paiement = models.FileField(upload_to='preuves/')
+    preuve_paiement = CloudinaryField('image')
 
     def __str__(self):
         return f"{self.profil.user.username} - {self.montant} FC"
