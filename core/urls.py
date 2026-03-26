@@ -24,4 +24,5 @@ urlpatterns = [
     path('retrait/valider/<int:retrait_id>/', views.valider_retrait, name='valider_retrait'),
     path('refuser-retrait/<int:retrait_id>/', views.refuser_retrait, name='refuser_retrait'),
     path('create-admin/', views.create_admin),
+    path('test_cloudinary/', views.test_cloudinary, name='test_cloudinary'),
 ]

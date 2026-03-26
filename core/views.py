@@ -341,3 +341,22 @@ def refuser_depot(request, depot_id):
 
 from django.contrib.auth.models import User
 from django.http import HttpResponse
+
+def create_admin(request):
+    if not User.objects.filter(username="admin").exists():
+        User.objects.create_superuser(
+            username="MosesBalume",
+            email="mosbangash.555@gmail.com",
+            password="BRABUS345"
+        )
+        return HttpResponse("Superuser créé")
+    return HttpResponse("superuser existe déjà")
+
+import os
+def test_cloudinary(request):
+    cloud_name = os.getenv('CLOUDINARY_CLOUD_NAME')
+    api_key=os.getenv('CLOUDINARY_API_KEY')
+    api_secret=os.getenv('CLOUDINARY_API_SECRET')
+
+    return HttpResponse(f"cloudname: {cloud_name}<br>API key: {api_key}<br>API secret: {api_secret}")
+    
