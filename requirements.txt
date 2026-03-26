@@ -6,7 +6,6 @@ django-crispy-forms==2.6
 djangorestframework==3.16.1
 filelock==3.18.0
 gunicorn==25.1.0
-mysqlclient==2.2.7
 packaging==26.0
 pillow==11.2.1
 platformdirs==4.3.7
@@ -17,3 +16,5 @@ virtualenv==20.31.1
 whitenoise==6.12.0
 cloudinary==1.44.1
 django-cloudinary-storage==0.3.0
+python-dotenv==1.0
+django-widget-tweaks==1.4
