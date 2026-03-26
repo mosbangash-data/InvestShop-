@@ -23,6 +23,4 @@ urlpatterns = [
     path('depot/refuser/<int:depot_id>/', views.refuser_depot, name='refuser_depot'),
     path('retrait/valider/<int:retrait_id>/', views.valider_retrait, name='valider_retrait'),
     path('refuser-retrait/<int:retrait_id>/', views.refuser_retrait, name='refuser_retrait'),
-    path('create-admin/', views.create_admin),
-    path('test_cloudinary/', views.test_cloudinary, name='test_cloudinary'),
 ]

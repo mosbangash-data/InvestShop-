@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',  # ton app
     'cloudinary',
-    'cloudinary_storage',
+    'django_cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -122,7 +122,7 @@ cloudinary.config(
     secure=True
 )
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+DEFAULT_FILE_STORAGE = 'django_cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # ----------------------------
 # Validation mot de passe
