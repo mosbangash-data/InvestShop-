@@ -341,13 +341,3 @@ def refuser_depot(request, depot_id):
 
 from django.contrib.auth.models import User
 from django.http import HttpResponse
-
-def create_admin(request):
-    if not User.objects.filter(username="admin").exists():
-        User.objects.create_superuser(
-            username="MosesBalume",
-            email="mosbangash.555@gmail.com",
-            password="BRABUS345"
-        )
-        return HttpResponse("Superuser créé")
-    return HttpResponse("superuser existe déjà")
