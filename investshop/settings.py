@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'fallback-secret-pour-dev-si-absent')
 
-DEBUG = False  # Production
+DEBUG = True  # Production
 
 # Ajouter domaine exact et wildcard pour Render
 ALLOWED_HOSTS = ['.onrender.com']
