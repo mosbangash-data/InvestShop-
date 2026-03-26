@@ -232,6 +232,7 @@ def admin_dashboard(request):
 # VALIDER DEPOT
 @login_required
 @user_passes_test(is_admin)
+@transaction.atomic
 def valider_depot(request, depot_id):
     depot = Depot.objects.select_for_update().get(id=depot_id)
     
